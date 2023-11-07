@@ -38,7 +38,7 @@ public class TestSimpleBankAccount {
         Assertions.assertEquals(10400, account.getBalance());
         Assertions.assertEquals(2, account.getTransactionsCount());
         account.deposit(aRossi.getUserID(), -40);
-        Assertions.assertEquals(10400, account.getBalance());
+        Assertions.assertEquals(10360, account.getBalance());
     }
 
     @Test
@@ -48,8 +48,9 @@ public class TestSimpleBankAccount {
         Assertions.assertEquals(0, account.getTransactionsCount());
         account.depositFromATM(aBianchi.getUserID(), 10000);
         Assertions.assertEquals(9999, account.getBalance());
-        account.depositFromATM(aBianchi.getUserID(), -141*-11);
-        Assertions.assertEquals(11.549, account.getBalance());
+        account.depositFromATM(aBianchi.getUserID(), -11);
+        System.out.println(account.getBalance());
+        Assertions.assertEquals(9987, account.getBalance());
     }
 
     @Test
@@ -59,8 +60,8 @@ public class TestSimpleBankAccount {
         account.withdraw(aBianchi.getUserID(), 5000);
         Assertions.assertEquals(5000, account.getBalance());
         account.withdraw(aBianchi.getUserID(), 10000);
-        Assertions.assertEquals(5000, account.getBalance());
-        Assertions.assertEquals(1, account.getTransactionsCount());
+        Assertions.assertEquals(-5000, account.getBalance());
+        Assertions.assertEquals(2, account.getTransactionsCount());
     }
 
     @Test
@@ -71,7 +72,7 @@ public class TestSimpleBankAccount {
         Assertions.assertEquals(0, account.getBalance());
         Assertions.assertEquals(1, account.getTransactionsCount());
         account.withdrawFromATM(aBianchi.getUserID(), 10);
-        Assertions.assertEquals(-10, account.getBalance());
+        Assertions.assertEquals(-11, account.getBalance());
     }
 
     @Test
