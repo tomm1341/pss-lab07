@@ -2,6 +2,9 @@ package it.unibo.bank.impl;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.jupiter.api.Assumptions.abort;
+
 import org.junit.jupiter.api.Assertions;
 
 import it.unibo.bank.api.AccountHolder;
@@ -49,7 +52,12 @@ public class TestSimpleBankAccount {
 
     @Test
     public void testWithdraw() {
-        
+        final double initialAmount = 10000;
+        BankAccount account = new SimpleBankAccount(aBianchi, initialAmount);
+        account.withdraw(aBianchi.getUserID(), 5000);
+        Assertions.assertEquals(5000, account.getBalance());
+        account.withdraw(aBianchi.getUserID(), 10000);
+        Assertions.assertEquals(5000, account.getBalance());
     }
     
 }
