@@ -37,5 +37,19 @@ public class TestSimpleBankAccount {
         Assertions.assertEquals(10400, account.getBalance());
     }
 
+    @Test
+    public void testDepositFromATM() {
+        final double initialAmount = 0;
+        BankAccount account = new SimpleBankAccount(aBianchi, initialAmount);
+        account.depositFromATM(aBianchi.getUserID(), 10000);
+        Assertions.assertEquals(9999, account.getBalance());
+        account.depositFromATM(aBianchi.getUserID(), -141*-11);
+        Assertions.assertEquals(11.549, account.getBalance());
+    }
+
+    @Test
+    public void testWithdraw() {
+        
+    }
     
 }
