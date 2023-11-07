@@ -36,6 +36,7 @@ public class TestSimpleBankAccount {
         Assertions.assertEquals(10000, account.getBalance());
         account.deposit(aRossi.getUserID(), 400);
         Assertions.assertEquals(10400, account.getBalance());
+        Assertions.assertEquals(2, account.getTransactionsCount());
         account.deposit(aRossi.getUserID(), -40);
         Assertions.assertEquals(10400, account.getBalance());
     }
@@ -44,6 +45,7 @@ public class TestSimpleBankAccount {
     public void testDepositFromATM() {
         final double initialAmount = 0;
         BankAccount account = new SimpleBankAccount(aBianchi, initialAmount);
+        Assertions.assertEquals(0, account.getTransactionsCount());
         account.depositFromATM(aBianchi.getUserID(), 10000);
         Assertions.assertEquals(9999, account.getBalance());
         account.depositFromATM(aBianchi.getUserID(), -141*-11);
@@ -58,6 +60,7 @@ public class TestSimpleBankAccount {
         Assertions.assertEquals(5000, account.getBalance());
         account.withdraw(aBianchi.getUserID(), 10000);
         Assertions.assertEquals(5000, account.getBalance());
+        Assertions.assertEquals(1, account.getTransactionsCount());
     }
 
     @Test
@@ -66,8 +69,18 @@ public class TestSimpleBankAccount {
         BankAccount account = new SimpleBankAccount(aBianchi, initialAmount);
         account.withdrawFromATM(aBianchi.getUserID(), 9999);
         Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertEquals(1, account.getTransactionsCount());
         account.withdrawFromATM(aBianchi.getUserID(), 10);
         Assertions.assertEquals(-10, account.getBalance());
+    }
+
+    @Test
+    public void testChargeManagementFees() {
+        final double initialAmount = 50;
+        BankAccount account = new SimpleBankAccount(aRossi, initialAmount);
+        account.chargeManagementFees(aRossi.getUserID());
+        Assertions.assertEquals(45, account.getBalance());
+        Assertions.assertEquals(0, account.getTransactionsCount());
     }
     
 }
