@@ -3,7 +3,7 @@ package it.unibo.bank.impl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import static org.junit.jupiter.api.Assumptions.abort;
+//import static org.junit.jupiter.api.Assumptions.abort;
 
 import org.junit.jupiter.api.Assertions;
 
