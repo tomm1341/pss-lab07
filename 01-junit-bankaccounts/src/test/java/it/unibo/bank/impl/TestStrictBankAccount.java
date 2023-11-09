@@ -1,6 +1,6 @@
 package it.unibo.bank.impl;
 
-import static org.junit.jupiter.api.Assumptions.abort;
+//import static org.junit.jupiter.api.Assumptions.abort;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,4 +31,16 @@ public class TestStrictBankAccount {
 
     }
 
+    @Test
+    public void testChargeManagementFees() {
+        final double initialAmount = 0;
+        BankAccount account = new StrictBankAccount(aRossi, initialAmount);
+        account.deposit(aRossi.getUserID(), 500000);
+        account.withdraw(aRossi.getUserID(), 499000);
+        Assertions.assertEquals(account.getBalance(), 1000);
+        Assertions.assertEquals(account.getTransactionsCount(), 2);
+        account.chargeManagementFees(aRossi.getUserID());
+        Assertions.assertEquals(account.getBalance(), 994.8);
+        Assertions.assertEquals(account.getTransactionsCount(), 0);
+    }
 }
